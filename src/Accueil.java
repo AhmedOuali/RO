@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 
-public class Graph {
+public class Accueil {
 
 	private JFrame frame;
 	private JTextField textField_NbreVariables;
@@ -23,7 +23,7 @@ public class Graph {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Graph window = new Graph();
+					Accueil window = new Accueil();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,7 +35,7 @@ public class Graph {
 	/**
 	 * Create the application.
 	 */
-	public Graph() {
+	public Accueil() {
 		initialize();
 	}
 
@@ -47,27 +47,7 @@ public class Graph {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		initAccueilPanel();
-		initFormulaireProgrammePanel();
-		initResultatPanel();
 		
-		
-		
-	}
-	void initResultatPanel(){
-		final JPanel Resultat = new JPanel();
-		Resultat.setBounds(0, 0, 448, 265);
-		frame.getContentPane().add(Resultat);
-	}
-	
-	void initFormulaireProgrammePanel(){
-		final JPanel FormulaireProgramme = new JPanel();
-		FormulaireProgramme.setBounds(0, 0, 448, 265);
-		frame.getContentPane().add(FormulaireProgramme);
-		FormulaireProgramme.setLayout(null);
-	}
-	
-	void initAccueilPanel(){
 		final JPanel Accueil = new JPanel();
 		Accueil.setBounds(0, 0, 448, 265);
 		frame.getContentPane().add(Accueil);
@@ -110,5 +90,7 @@ public class Graph {
 		
 		btnSuivant.setBounds(43, 142, 312, 25);
 		Accueil.add(btnSuivant);
-	}
+		
+	}	
+		
 }

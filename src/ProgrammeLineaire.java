@@ -8,7 +8,7 @@
 		private ArrayList<Float> coefficientsFonctionObjective;
 		private ArrayList<ArrayList<Float>> coefficientsContraintes;
 		private ArrayList<String> Signe;
-		Graph graph;
+		Accueil graph;
 		
 		//-------------------Constructeur-1-"comme demandé-dans le TP"--------------
 		ProgrammeLineaire(int nombreVariables,int nombreContraintes){
@@ -23,7 +23,7 @@
 		
 		
 		//-----------------Constructeur-2-"Celui qu'on va utiliser dans la suite----
-		ProgrammeLineaire(Graph graph){
+		ProgrammeLineaire(Accueil graph){
 			this.graph=graph;
 		}
 		
