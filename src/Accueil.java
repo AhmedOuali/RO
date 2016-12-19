@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 
-public class Accueil {
+public class Accueil extends javax.swing.JFrame{
 
 	private JFrame frame;
 	private JTextField textField_NbreVariables;
@@ -83,13 +83,16 @@ public class Accueil {
 			public void actionPerformed(ActionEvent arg0) {
 				nombreContrainte=Integer.parseInt(textField_NbreContraintes.getText());
 				nombreVariables=Integer.parseInt(textField_NbreVariables.getText());
-				Accueil.show(false);
+				Formulaire form=new Formulaire();
+				frame.setVisible(false);
+				form.setVisible(true);
 			}
 		});
 		////////////////////////////////////////////////////////////////////////////////
 		
 		btnSuivant.setBounds(43, 142, 312, 25);
 		Accueil.add(btnSuivant);
+		
 		
 	}	
 		
