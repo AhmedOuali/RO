@@ -36,7 +36,7 @@
 		//----------------ajouterVariable()--------------------------------
 		void ajouterVariable(int pos){
 			for(int i=0;i<coefficientsContraintes.size();i++){
-				coefficientsContraintes.get(i).get(pos).add(-coefficientsContraintes.get(i).get(pos));
+				coefficientsContraintes.get(i).add(pos, -coefficientsContraintes.get(i).get(pos));
 			}
 			
 		}
