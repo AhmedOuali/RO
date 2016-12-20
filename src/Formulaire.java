@@ -57,7 +57,7 @@ public class Formulaire extends JFrame {
 			
 			panel.add(new JComboBox(new String[] { "", "<=", ">=", "=" }));
 			panel.add(new JTextField());
-			
+			//
 				
 		}
 		
