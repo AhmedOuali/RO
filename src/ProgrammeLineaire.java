@@ -9,13 +9,14 @@
 		private ArrayList<ArrayList<Float>> coefficientsContraintes;
 		private ArrayList<String> signeInegalites;
 		private ArrayList<String> signesVariables;
-		Accueil graph;
+		
 		
 		//-------------------Constructeur-1-"comme demandé-dans le TP"--------------
 		ProgrammeLineaire(int nombreVariables,int nombreContraintes){
 			this.nombreVariables=nombreVariables;
 			this.nombreContraintes=nombreContraintes;
 			signeInegalites=new ArrayList<String>();
+			signesVariables=new ArrayList<String>();
 			coefficientsFonctionObjective = new ArrayList<Float>();
 			coefficientsContraintes=new ArrayList<ArrayList<Float>>();
 			
@@ -28,6 +29,12 @@
 		
 		ArrayList<Float> getcoefficientsFonctionObjective(){
 			return coefficientsFonctionObjective;
+		}
+		ArrayList<String> getsigneInegalites(){
+			return signeInegalites;
+		}
+		ArrayList<String> getsignesVariables(){
+			return signesVariables;
 		}
 
 		

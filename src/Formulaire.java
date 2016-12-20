@@ -11,11 +11,13 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class Formulaire extends JFrame {
 	private Accueil accueil;
-	private ArrayList<ArrayList<JTextField>> matriceDuProbleme;
+	private ArrayList<ArrayList<JTextField>> coefficientsContraintes;
 	private ArrayList<JComboBox> signeInegalites;
 	private ProgrammeLineaire programmeLineaire;
 	private ArrayList<JTextField> coefficientsFonctionObjective;
@@ -32,7 +34,7 @@ public class Formulaire extends JFrame {
 		programmeLineaire=new ProgrammeLineaire(accueil.getNombreContraintes(),accueil.getNombreVariables());
 		
 		
-		matriceDuProbleme=new ArrayList<ArrayList<JTextField>>();
+		coefficientsContraintes=new ArrayList<ArrayList<JTextField>>();
 		coefficientsFonctionObjective=new ArrayList<JTextField>();
 		signeInegalites=new ArrayList<JComboBox>();
 		signesVariables=new ArrayList<JComboBox>();
@@ -63,6 +65,21 @@ public class Formulaire extends JFrame {
 		lblFonctionObjective.setBounds(38, 71, 151, 15);
 		getContentPane().add(lblFonctionObjective);
 		
+		JButton btnSuivant = new JButton("Suivant ->");
+		
+		//-----Bouton suivant------------------------------
+		btnSuivant.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				setAllProgrammeLineareAttributs()	;
+				Resultat res=new Resultat();
+				setVisible(false);
+				res.setVisible(true);
+			}
+		});
+		btnSuivant.setBounds(573, 24, 117, 25);
+		getContentPane().add(btnSuivant);
+		
 		//panel.setLayout(new java.awt.GridLayout(accueil.getNombreContraintes(),accueil.getNombreVariables()));
 		//panel.setLayout(new java.awt.GridLayout(accueil.getNombreContraintes(),accueil.getNombreVariables()));
 		
@@ -70,14 +87,15 @@ public class Formulaire extends JFrame {
 		// preparation du tableau contraintes
 		panel.setLayout(new java.awt.GridLayout(accueil.getNombreContraintes(),accueil.getNombreVariables()));
 			for(int i=0;i<accueil.getNombreContraintes();i++){
+				coefficientsContraintes.add(new ArrayList<JTextField>());
 				for(int j=0;j<accueil.getNombreVariables();j++){
 					
 					JTextField Text;
 					panel.add(Text=new JTextField());
 					
 					//remplissage Du tableau dynamique matriceDuProbleme
-					matriceDuProbleme.add(new ArrayList<JTextField>());
-					matriceDuProbleme.get(i).add(Text);
+					
+					coefficientsContraintes.get(i).add(Text);
 					/////////////////////////////////////////
 					
 					//condition d'affichage (ne pas afficher "+" aprés le derbier variable
@@ -98,8 +116,8 @@ public class Formulaire extends JFrame {
 				
 				JTextField Text;
 				panel.add(Text=new JTextField());
-				matriceDuProbleme.add(new ArrayList<JTextField>());
-				matriceDuProbleme.get(i).add(Text);		
+				coefficientsContraintes.add(new ArrayList<JTextField>());
+				coefficientsContraintes.get(i).add(Text);		
 			}
 		//
 			
@@ -119,12 +137,37 @@ public class Formulaire extends JFrame {
 			for(int i=0;i<accueil.getNombreVariables();i++){
 				JComboBox combo;
 				panel_1.add(combo=new JComboBox(new String[] {"R", "R+", "R-" }));
-				panel_1.add( new JLabel(""));
 				signesVariables.add(combo);
+				panel_1.add( new JLabel(""));
+				
 			}
 			
 		//
-				
-			
+		
 	}
+	
+	void setAllProgrammeLineareAttributs(){
+		for(int i=0;i<coefficientsContraintes.size();i++){
+			programmeLineaire.getcoefficientsContraintes().add(new ArrayList<Float>());
+			for(int j=0;j<coefficientsContraintes.get(i).size();j++){
+				
+				programmeLineaire.getcoefficientsContraintes().get(i).add( Float.parseFloat(coefficientsContraintes.get(i).get(j).getText()));
+			}
+		}
+		
+		for(int i=0;i<signeInegalites.size();i++){
+			programmeLineaire.getsigneInegalites().add(signeInegalites.get(i).getSelectedItem().toString());
+		}
+		
+		for(int i=0;i<coefficientsFonctionObjective.size();i++){
+			programmeLineaire.getcoefficientsFonctionObjective().add(Float.parseFloat(coefficientsFonctionObjective.get(i).getText()));
+		}
+				
+		for(int i=0;i<signesVariables.size();i++){
+			
+			programmeLineaire.getsignesVariables().add(signesVariables.get(i).getSelectedItem().toString());
+		}	
+	}
+	
+	
 }
