@@ -14,7 +14,7 @@ public class Accueil extends javax.swing.JFrame{
 	private JFrame frame;
 	private JTextField textField_NbreVariables;
 	private JTextField textField_NbreContraintes;
-	private int nombreContrainte;
+	private int nombreContraintes;
 	private int nombreVariables;
 	/**
 	 * Launch the application.
@@ -81,11 +81,18 @@ public class Accueil extends javax.swing.JFrame{
 		////////////////////////////////////////////////////////////////////////////
 		btnSuivant.addActionListener(new ActionListener() {		
 			public void actionPerformed(ActionEvent arg0) {
-				nombreContrainte=Integer.parseInt(textField_NbreContraintes.getText());
-				nombreVariables=Integer.parseInt(textField_NbreVariables.getText());
-				Formulaire form=new Formulaire();
+				//creation d'un object accueil qui va porter tous les attributs de cette interface
+				Accueil accueil=new Accueil();
+				accueil.nombreContraintes=Integer.parseInt(textField_NbreContraintes.getText());
+				accueil.nombreVariables=Integer.parseInt(textField_NbreVariables.getText());
+				
+				
+				//Passage De cette object vers l'objet de type Formulaire
+				Formulaire form=new Formulaire(accueil);
+
 				frame.setVisible(false);
 				form.setVisible(true);
+				
 			}
 		});
 		////////////////////////////////////////////////////////////////////////////////
@@ -93,7 +100,12 @@ public class Accueil extends javax.swing.JFrame{
 		btnSuivant.setBounds(43, 142, 312, 25);
 		Accueil.add(btnSuivant);
 		
-		
 	}	
-		
+	int getNombreContraintes(){
+		return this.nombreContraintes;
+	}
+	int getNombreVariables(){
+		return this.nombreVariables;
+	}
+	
 }

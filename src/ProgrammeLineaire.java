@@ -22,10 +22,8 @@
 		/////////////////////////////////////////////////////////////////////////
 		
 		
-		//-----------------Constructeur-2-"Celui qu'on va utiliser dans la suite----
-		ProgrammeLineaire(Accueil graph){
-			this.graph=graph;
-		}
+
+		
 		
 		//------------------manipulerVariableDecision()--------------------
 		void manipulerVariablesDescision(){
