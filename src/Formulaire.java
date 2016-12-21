@@ -22,6 +22,7 @@ public class Formulaire extends JFrame {
 	private ProgrammeLineaire programmeLineaire;
 	private ArrayList<JTextField> coefficientsFonctionObjective;
 	private ArrayList<JComboBox> signesVariables;
+	private JComboBox mM;
 	/**
 	 * Launch the application.
 	 */
@@ -31,13 +32,13 @@ public class Formulaire extends JFrame {
 	 * Create the frame.
 	 */
 	public Formulaire(Accueil accueil) {
-		programmeLineaire=new ProgrammeLineaire(accueil.getNombreContraintes(),accueil.getNombreVariables());
+		programmeLineaire=new ProgrammeLineaire(accueil.getNombreVariables(),accueil.getNombreContraintes());
 		
+		coefficientsContraintes=new ArrayList<ArrayList<JTextField>>();//
+		coefficientsFonctionObjective=new ArrayList<JTextField>();     //Creation des tableau dinamique des objects
+		signeInegalites=new ArrayList<JComboBox>();                    // JTextField et JComboBox
+		signesVariables=new ArrayList<JComboBox>();                    //
 		
-		coefficientsContraintes=new ArrayList<ArrayList<JTextField>>();
-		coefficientsFonctionObjective=new ArrayList<JTextField>();
-		signeInegalites=new ArrayList<JComboBox>();
-		signesVariables=new ArrayList<JComboBox>();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 718, 469);
 		getContentPane().setLayout(null);
@@ -54,6 +55,7 @@ public class Formulaire extends JFrame {
 		getContentPane().add(panel_1);
 		
 		JComboBox maxMin = new JComboBox(new String[] {"Max", "Min" });
+		mM=maxMin;
 		maxMin.setBounds(347, 25, 114, 24);
 		getContentPane().add(maxMin);
 		
@@ -72,7 +74,7 @@ public class Formulaire extends JFrame {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				setAllProgrammeLineareAttributs()	;
-				Resultat res=new Resultat();
+				Resultat res=new Resultat(programmeLineaire);
 				setVisible(false);
 				res.setVisible(true);
 			}
@@ -80,8 +82,8 @@ public class Formulaire extends JFrame {
 		btnSuivant.setBounds(573, 24, 117, 25);
 		getContentPane().add(btnSuivant);
 		
-		//panel.setLayout(new java.awt.GridLayout(accueil.getNombreContraintes(),accueil.getNombreVariables()));
-		//panel.setLayout(new java.awt.GridLayout(accueil.getNombreContraintes(),accueil.getNombreVariables()));
+		////////////////////////////////////////////////////////
+		
 		
 		
 		// preparation du tableau contraintes
@@ -112,16 +114,14 @@ public class Formulaire extends JFrame {
 				signeInegalites.add(combo);
 				///////////////////////////////////////////////////////////
 				
-				
-				
 				JTextField Text;
 				panel.add(Text=new JTextField());
-				coefficientsContraintes.add(new ArrayList<JTextField>());
+				
 				coefficientsContraintes.get(i).add(Text);		
 			}
-		//
+		///////////////////////////////////////////////////////////////////////////////////////////
 			
-		//preparatin de la fonction objective
+		//--------------------preparatin de la fonction objective---------------------------------
 			panel_1.setLayout(new java.awt.GridLayout(2,accueil.getNombreVariables()*2));
 			for(int i=0;i<accueil.getNombreVariables();i++){
 				JTextField Text;
@@ -141,10 +141,12 @@ public class Formulaire extends JFrame {
 				panel_1.add( new JLabel(""));
 				
 			}
-			
-		//
-		
+		/////////////////////////////////////////////////////////////////////////////////////////////////	
 	}
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	//methode qui affecte les tableaux d'object JTextField et JCombobox au attributs de ProgrammeLineaire
 	
 	void setAllProgrammeLineareAttributs(){
 		for(int i=0;i<coefficientsContraintes.size();i++){
@@ -166,8 +168,9 @@ public class Formulaire extends JFrame {
 		for(int i=0;i<signesVariables.size();i++){
 			
 			programmeLineaire.getsignesVariables().add(signesVariables.get(i).getSelectedItem().toString());
-		}	
+		}
+		programmeLineaire.setbut(mM.getSelectedItem().toString());
 	}
-	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 }
