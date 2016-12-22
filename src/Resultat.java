@@ -46,11 +46,11 @@ public class Resultat extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("Resolution d'un programme lineaire");
 		lblNewLabel.setFont(new Font("DialogInput", Font.BOLD, 16));
-		lblNewLabel.setBounds(177, 0, 345, 15);
+		lblNewLabel.setBounds(317, 0, 345, 15);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblFomreSaisie = new JLabel("Fomre saisie");
-		lblFomreSaisie.setBounds(50, 51, 112, 15);
+		lblFomreSaisie.setBounds(214, 43, 112, 15);
 		contentPane.add(lblFomreSaisie);
 		
 		JLabel lblFormeCanonique = new JLabel("Forme canonique");
@@ -124,7 +124,6 @@ public class Resultat extends JFrame {
 			}	
 		}
 		
-		
 		clonerProgrammeLineaire(); //orperation de clonage de deux object ProgrammeLineaire (Construction de FormeCanonique et FormeStandard)
 		
 		FormeCanonique.convertirALaFormeCanonique();//Construire la forme canonique
@@ -147,15 +146,10 @@ public class Resultat extends JFrame {
 		FormeStandard.setsignesVariables((ArrayList<String>)programmeLineaire.getsignesVariables().clone());
 	}
 	
-	
 	void construirePanel(JPanel panel1 ,ProgrammeLineaire programmeLineaire){
 		panel1.setLayout(new java.awt.GridLayout((programmeLineaire.getnombreContraintes()+1),(programmeLineaire.getnombreVariables()*2+2)));
 		panel1.add(new JLabel(programmeLineaire.getbut()));
-		
-		System.out.println((programmeLineaire.getnombreContraintes()+1));
-		System.out.println((programmeLineaire.getnombreVariables()*2+2));
-		System.out.println(programmeLineaire.getnombreContraintes()); ///////////////////
-		System.out.println(programmeLineaire.getnombreVariables());
+
 		for(int i=0;i<programmeLineaire.getcoefficientsFonctionObjective().size();i++){
 			panel1.add(new JLabel(programmeLineaire.getcoefficientsFonctionObjective().get(i).toString()));
 			if(programmeLineaire.getcoefficientsFonctionObjective().size()-i!=i)

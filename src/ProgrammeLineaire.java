@@ -5,7 +5,7 @@
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-	public class ProgrammeLineaire implements Cloneable {
+	public class ProgrammeLineaire implements Cloneable { //implements Cloneable (pour pouvoir le cloner en plusieurs objets)
 		private int nombreVariables;
 		private int nombreContraintes;
 		private ArrayList<Float> coefficientsFonctionObjective;
@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 		private String but;
 		
 		
+		//-----------------------Implementation du methode de clonage- pour avoir par la suite deux objet cloner de programmeLineaire
 		public Object clone() {
 			Object o = null;
 			try {
@@ -29,6 +30,9 @@ import javax.swing.JTextField;
 			// on renvoie le clone
 			return o;
 		}
+		///////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		
 		//-------------------Constructeur-1-"comme demandé-dans le TP"--------------
 		ProgrammeLineaire(int nombreVariables,int nombreContraintes){
 			this.nombreVariables=nombreVariables;
@@ -41,6 +45,8 @@ import javax.swing.JTextField;
 		}
 		/////////////////////////////////////////////////////////////////////////
 		
+		
+		//-------------Les Getters et Setters----------------------------------
 		ArrayList<ArrayList<Float>> getcoefficientsContraintes(){
 			return coefficientsContraintes;
 		}
@@ -81,7 +87,7 @@ import javax.swing.JTextField;
 		void setsignesVariables(ArrayList<String> signesVariables){
 			this.signesVariables=signesVariables;
 		}
-		
+		/////////////////////////////////////////////////////////////////////////////////////
 		
 		//------------------manipulerVariableDecision()--------------------
 		void manipulerVariablesDescision(){
@@ -119,6 +125,8 @@ import javax.swing.JTextField;
 			}
 			
 		}
+		
+		//---------------manipulerVariablesDécision()-------------------------------
 		void manipulerVariablesDécision(){
 			for(int i=0;i<signesVariables.size();i++){
 				switch (signesVariables.get(i)) {
@@ -131,7 +139,9 @@ import javax.swing.JTextField;
 				}
 			}
 		}
+		////////////////////////////////////////////////////////////////////////////////
 		
+		//---------------------Transformer l'objet ProgrammeLineaire en forme canonique-------------------
 		void convertirALaFormeCanonique(){
 			switch (but){
 			case "Max":
@@ -142,9 +152,6 @@ import javax.swing.JTextField;
 					}
 					if(signeInegalites.get(i)=="="){
 						signeInegalites.set(i, "<=");
-						
-						
-						
 						coefficientsContraintes.add(new ArrayList<Float>());
 						nombreContraintes++;
 						
@@ -153,13 +160,11 @@ import javax.swing.JTextField;
 							coefficientsContraintes.get(coefficientsContraintes.size()-1).add(coefficientsContraintes.get(i).get(j));
 						}
 						signeInegalites.add("<=");
-						inverserLigne(coefficientsContraintes.size()-1);
-						
-					}
-						
-					
+						inverserLigne(coefficientsContraintes.size()-1);	
+					}	
 				}
 				break;
+				
 			case "Min":
 				for(int i=0;i<signeInegalites.size();i++){
 					if(signeInegalites.get(i)=="<="){
@@ -169,10 +174,8 @@ import javax.swing.JTextField;
 					if(signeInegalites.get(i)=="="){
 						signeInegalites.set(i, ">=");
 						coefficientsContraintes.add(new ArrayList<Float>());
-						nombreContraintes++;
-						
+						nombreContraintes++;		
 						for(int j=0;j<coefficientsContraintes.get(i).size();j++){
-							//JOptionPane.showMessageDialog(null,coefficientsContraintes.size() );
 							coefficientsContraintes.get(coefficientsContraintes.size()-1).add(coefficientsContraintes.get(i).get(j));
 						}
 						signeInegalites.add(">=");
@@ -182,8 +185,9 @@ import javax.swing.JTextField;
 				break;
 			}
 		}
+		//////////////////////////////////////////////////////////////////////////////////////////////////////
 		
-		
+		//---------------------Transformer l'objet ProgrammeLineaire en forme canonique-------------------
 		void convertirALaFormeStandard(){
 			for(int i=0;i<signeInegalites.size();i++){
 				switch (signeInegalites.get(i)){
@@ -202,7 +206,7 @@ import javax.swing.JTextField;
 				}
 			}
 		}
-		
+		/////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		void inverserLigne(int pos){
 			for(int i=0;i<coefficientsContraintes.get(pos).size();i++)
